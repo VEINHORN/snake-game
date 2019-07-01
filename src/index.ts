@@ -22,13 +22,13 @@ function gameLoop(timestamp) {
 
   ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-  game.update();
   game.draw(ctx);
+  game.update();
 
   /*if (progress < 150000) {
     window.requestAnimationFrame(gameLoop);
   }*/
-  var fps = 3;
+  var fps = 5;
   setTimeout(() => {
     window.requestAnimationFrame(gameLoop);
   }, 1000 / fps);

@@ -7,10 +7,21 @@ export class Snake {
   private _direction: Direction;
 
   constructor(cellSize: number) {
-    this._parts = [new SnakePart(0, 0)]; // init Snake with 1 item
     this.cellSize = cellSize;
+    this._parts = [
+      new SnakePart(cellSize * 0, 0),
+      new SnakePart(cellSize * 1, 0),
+      new SnakePart(cellSize * 2, 0),
+      new SnakePart(cellSize * 3, 0),
+      new SnakePart(cellSize * 4, 0),
+      new SnakePart(cellSize * 5, 0),
+      new SnakePart(cellSize * 6, 0),
+      new SnakePart(cellSize * 7, 0),
+      new SnakePart(cellSize * 8, 0),
+      new SnakePart(cellSize * 9, 0)
+    ];
 
-    // set up direction
+    // Right is direction by default
     this._direction = Direction.Right;
   }
 
@@ -27,23 +38,40 @@ export class Snake {
   }
 
   update() {
-    // Here we change coords for each of snake parts
-    this._parts.forEach(element => {
-      switch (this._direction) {
-        case Direction.Left:
-          element.x -= this.cellSize;
-          break;
-        case Direction.Right:
-          element.x += this.cellSize;
-          break;
-        case Direction.Up:
-          element.y -= this.cellSize;
-          break;
-        case Direction.Down:
-          element.y += this.cellSize;
-          break;
-      }
-    });
+    switch (this._direction) {
+      case Direction.Left:
+        this._parts = this._parts
+          .slice(1)
+          .concat([
+            new SnakePart(this.getHead().x - this.cellSize, this.getHead().y)
+          ]);
+        break;
+      case Direction.Right:
+        this._parts = this._parts
+          .slice(1)
+          .concat([
+            new SnakePart(this.getHead().x + this.cellSize, this.getHead().y)
+          ]);
+        break;
+      case Direction.Up:
+        this._parts = this._parts
+          .slice(1)
+          .concat([
+            new SnakePart(this.getHead().x, this.getHead().y - this.cellSize)
+          ]);
+        break;
+      case Direction.Down:
+        this._parts = this._parts
+          .slice(1)
+          .concat([
+            new SnakePart(this.getHead().x, this.getHead().y + this.cellSize)
+          ]);
+        break;
+    }
+  }
+
+  getHead() {
+    return this._parts[this._parts.length - 1];
   }
 
   draw(ctx: CanvasRenderingContext2D) {
