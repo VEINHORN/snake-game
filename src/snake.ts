@@ -1,26 +1,35 @@
-import { SnakeItem } from "./snake_item";
+import { SnakePart } from "./snake_part";
 import { Direction } from "./direction";
 
 export class Snake {
-  private items: SnakeItem[];
+  private _parts: SnakePart[];
   private cellSize: number;
-  private direction: Direction;
+  private _direction: Direction;
 
   constructor(cellSize: number) {
-    this.items = [new SnakeItem(0, 0)]; // init Snake with 1 item
+    this._parts = [new SnakePart(0, 0)]; // init Snake with 1 item
     this.cellSize = cellSize;
 
     // set up direction
-    this.direction = Direction.Right;
+    this._direction = Direction.Right;
+  }
+
+  get direction() {
+    return this._direction;
+  }
+
+  get parts() {
+    return this._parts;
   }
 
   changeDirection(direction: Direction) {
-    this.direction = direction;
+    this._direction = direction;
   }
 
   update() {
-    this.items.forEach(element => {
-      switch (this.direction) {
+    // Here we change coords for each of snake parts
+    this._parts.forEach(element => {
+      switch (this._direction) {
         case Direction.Left:
           element.x -= this.cellSize;
           break;
@@ -38,7 +47,7 @@ export class Snake {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    this.items.forEach(element => {
+    this._parts.forEach(element => {
       element.draw(ctx);
     });
   }

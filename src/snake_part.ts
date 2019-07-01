@@ -1,4 +1,4 @@
-export class SnakeItem {
+export class SnakePart {
   constructor(private _x: number, private _y: number) {
     this._x = _x;
     this._y = _y;
