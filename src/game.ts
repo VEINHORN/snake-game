@@ -3,6 +3,7 @@ import { Eat } from "./eat";
 import { Direction } from "./direction";
 import { SnakePart } from "./snake/snake_part";
 import { EatCollisionDetector } from "./collision/eat_collision";
+import { Bullet } from "./weapon/bullet";
 
 export class Game {
   private _snake: Snake;
@@ -50,8 +51,9 @@ export class Game {
     // Detect collisions
     if (
       new EatCollisionDetector(this._snake, this._eat, this.cellSize).detect()
-    )
+    ) {
       this._eat.push(this.createRandomEat());
+    }
 
     // Update snake state
     this._snake.update();
@@ -72,11 +74,13 @@ export class Game {
       ctx.strokeStyle = "grey";
       ctx.stroke();
     }
+
     // Draw eat
     this._eat.forEach(element => {
-      console.log(element);
+      // console.log(element);
       element.draw(ctx);
     });
+
     // Draw snake
     this._snake.draw(ctx);
   }

@@ -5,6 +5,11 @@ export class Control {
   constructor(snake: Snake) {
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
+        // Enter key - open fire
+        case 13:
+          snake.fire();
+          break;
+
         case 37:
           snake.changeDirection(Direction.Left);
           break;
