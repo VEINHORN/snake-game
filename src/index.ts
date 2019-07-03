@@ -1,5 +1,5 @@
 import { Game } from "./game";
-import { Snake } from "./snake";
+import { Snake } from "./snake/snake";
 import { Control } from "./control";
 
 let canvas = <HTMLCanvasElement>document.getElementById("gameScreen");

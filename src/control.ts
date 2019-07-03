@@ -1,4 +1,4 @@
-import { Snake } from "./snake";
+import { Snake } from "./snake/snake";
 import { Direction } from "./direction";
 
 export class Control {

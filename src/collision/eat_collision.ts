@@ -1,8 +1,8 @@
 import { CollisionDetector } from "./collision";
-import { Snake } from "../snake";
+import { Snake } from "../snake/snake";
 import { Eat } from "../eat";
 import { Direction } from "../direction";
-import { SnakePart } from "../snake_part";
+import { SnakePart } from "../snake/snake_part";
 
 /**
  * Detects collision between snake and eat
