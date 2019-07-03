@@ -11,14 +11,7 @@ export class Snake {
     this._parts = [
       new SnakePart(cellSize * 0, 0),
       new SnakePart(cellSize * 1, 0),
-      new SnakePart(cellSize * 2, 0),
-      new SnakePart(cellSize * 3, 0),
-      new SnakePart(cellSize * 4, 0),
-      new SnakePart(cellSize * 5, 0),
-      new SnakePart(cellSize * 6, 0),
-      new SnakePart(cellSize * 7, 0),
-      new SnakePart(cellSize * 8, 0),
-      new SnakePart(cellSize * 9, 0)
+      new SnakePart(cellSize * 2, 0)
     ];
 
     // Right is direction by default

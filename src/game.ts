@@ -2,6 +2,7 @@ import { Snake } from "./snake";
 import { Eat } from "./eat";
 import { Direction } from "./direction";
 import { SnakePart } from "./snake_part";
+import { EatCollisionDetector } from "./collision/eat_collision";
 
 export class Game {
   private _snake: Snake;
@@ -18,8 +19,8 @@ export class Game {
 
     this._snake = new Snake(cellSize);
     this._eat = [
-      new Eat(cellSize * 20, cellSize * 1, cellSize),
-      new Eat(cellSize * 30, cellSize * 1, cellSize)
+      new Eat(cellSize * 20, cellSize * 5, cellSize),
+      new Eat(cellSize * 30, cellSize * 5, cellSize)
     ];
   }
 
@@ -33,32 +34,9 @@ export class Game {
 
   update() {
     // Detect collisions
+    new EatCollisionDetector(this._snake, this._eat, this.cellSize).detect();
 
-    if (this._snake.direction == Direction.Right) {
-      let head = this.snake.getHead();
-
-      let flag = false;
-
-      for (let i = 0; i < this._eat.length; i++) {
-        if (
-          head.x + this.cellSize == this._eat[i].x &&
-          head.y == this._eat[i].y
-        ) {
-          this._snake.parts.push(new SnakePart(this._eat[i].x, this._eat[i].y));
-          console.log("right direction collision detected");
-
-          flag = true;
-          break;
-        }
-      }
-
-      if (flag) {
-        this._eat.shift();
-        return;
-      }
-      // console.log("Snake head: {x: " + head.x + ", y: " + head.y);
-    }
-
+    // Update snake state
     this._snake.update();
   }
 
@@ -74,6 +52,7 @@ export class Game {
       ctx.beginPath();
       ctx.moveTo(0, this.cellSize * i);
       ctx.lineTo(this.gameWidth, this.cellSize * i);
+      ctx.strokeStyle = "grey";
       ctx.stroke();
     }
     // Draw eat
