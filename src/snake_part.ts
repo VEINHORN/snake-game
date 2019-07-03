@@ -5,7 +5,7 @@ export class SnakePart {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = "#0ff";
+    ctx.fillStyle = "black";
     ctx.fillRect(this._x, this._y, 15, 15);
   }
 

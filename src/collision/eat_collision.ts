@@ -18,7 +18,7 @@ export class EatCollisionDetector implements CollisionDetector {
     this.delta = delta;
   }
 
-  detect() {
+  detect(): boolean {
     if (this.snake.direction == Direction.Right) {
       let snakeHead = this.snake.getHead();
       let isCollisionOccured = false;
@@ -41,6 +41,8 @@ export class EatCollisionDetector implements CollisionDetector {
       if (isCollisionOccured) {
         this.deleteEat(eatItemToRemove);
       }
+
+      return isCollisionOccured;
     } else if (this.snake.direction == Direction.Left) {
       let snakeHead = this.snake.getHead();
       let isCollisionOccured = false;
@@ -67,6 +69,8 @@ export class EatCollisionDetector implements CollisionDetector {
       if (isCollisionOccured) {
         this.deleteEat(eatItemToRemove);
       }
+
+      return isCollisionOccured;
     } else if (this.snake.direction == Direction.Up) {
       let snakeHead = this.snake.getHead();
       let isCollisionOccured = false;
@@ -89,6 +93,8 @@ export class EatCollisionDetector implements CollisionDetector {
           this.deleteEat(eatItemToRemove);
         }
       }
+
+      return isCollisionOccured;
     } else if (this.snake.direction == Direction.Down) {
       let snakeHead = this.snake.getHead();
       let isCollisionOccured = false;
@@ -111,7 +117,11 @@ export class EatCollisionDetector implements CollisionDetector {
       if (isCollisionOccured) {
         this.deleteEat(eatItemToRemove);
       }
+
+      return isCollisionOccured;
     }
+
+    return false;
   }
 
   private growSnake(snakePart: SnakePart) {

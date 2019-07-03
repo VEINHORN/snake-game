@@ -18,23 +18,40 @@ export class Game {
     this.cellSize = cellSize;
 
     this._snake = new Snake(cellSize);
-    this._eat = [
-      new Eat(cellSize * 20, cellSize * 5, cellSize),
-      new Eat(cellSize * 30, cellSize * 5, cellSize)
-    ];
+
+    // fill game field with eat objects
+    this._eat = [];
+    for (let i = 0; i < 5; i++) {
+      this._eat.push(
+        new Eat(
+          cellSize * Math.floor(Math.random() * (gameHeight / cellSize) + 0),
+          cellSize * Math.floor(Math.random() * (gameHeight / cellSize) + 0),
+          cellSize
+        )
+      );
+    }
   }
 
   get snake() {
     return this._snake;
   }
 
-  generateEat() {
-    // ...
+  private createRandomEat(): Eat {
+    return new Eat(
+      this.cellSize *
+        Math.floor(Math.random() * (this.gameHeight / this.cellSize) + 0),
+      this.cellSize *
+        Math.floor(Math.random() * (this.gameHeight / this.cellSize) + 0),
+      this.cellSize
+    );
   }
 
   update() {
     // Detect collisions
-    new EatCollisionDetector(this._snake, this._eat, this.cellSize).detect();
+    if (
+      new EatCollisionDetector(this._snake, this._eat, this.cellSize).detect()
+    )
+      this._eat.push(this.createRandomEat());
 
     // Update snake state
     this._snake.update();

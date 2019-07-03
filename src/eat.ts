@@ -29,7 +29,7 @@ export class Eat implements GameObject {
       "Eat: {x: " + this._x + ", y: " + this._y + "}" + this.cellSize
     );*/
 
-    ctx.fillStyle = "#0ff";
+    ctx.fillStyle = this.color;
     ctx.fillRect(this._x, this._y, this.cellSize, this.cellSize);
   }
 }
