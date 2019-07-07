@@ -4,10 +4,15 @@ import { Direction } from "./direction";
 import { SnakePart } from "./snake/snake_part";
 import { EatCollisionDetector } from "./collision/eat_collision";
 import { Bullet } from "./weapon/bullet";
+import { Cell } from "./object/cell";
+import { Wall } from "./object/wall";
+import { BulletCollisionDetector } from "./collision/bullet_collision";
 
 export class Game {
   private _snake: Snake;
   private _eat: Eat[];
+  private _cells: Cell[];
+  private _walls: Wall[];
 
   constructor(
     private gameHeight: number,
@@ -31,6 +36,10 @@ export class Game {
         )
       );
     }
+
+    this._cells = [new Cell(1, 1)];
+
+    this._walls = [Wall.yWall(13, 20, 20)];
   }
 
   get snake() {
@@ -54,6 +63,12 @@ export class Game {
     ) {
       this._eat.push(this.createRandomEat());
     }
+
+    new BulletCollisionDetector(
+      this.snake.bullets,
+      this._walls,
+      this.cellSize
+    ).detect();
 
     // Update snake state
     this._snake.update();
@@ -84,7 +99,8 @@ export class Game {
     // Draw snake
     this._snake.draw(ctx);
 
-    // ctx.drawImage(<CanvasImageSource>document.getElementById("apple"), 0, 0);
+    this._cells.forEach(cell => cell.draw(ctx));
+    this._walls.forEach(wall => wall.draw(ctx));
   }
 
   // detect collision between snake and eat

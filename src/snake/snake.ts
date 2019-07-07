@@ -24,6 +24,10 @@ export class Snake {
     this._bullets = [];
   }
 
+  get bullets() {
+    return this._bullets;
+  }
+
   fire() {
     if (this._direction == Direction.Right) {
       this._bullets.push(

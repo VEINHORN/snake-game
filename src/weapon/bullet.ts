@@ -10,21 +10,29 @@ export class Bullet implements Weapon, Position, GameObject {
     private _x: number,
     private _y: number,
     private cellSize: number,
-    private direction: Direction
+    private _direction: Direction
   ) {}
 
-  x: number = this._x;
+  get x() {
+    return this._x;
+  }
 
-  y: number = this._y;
+  get y() {
+    return this._y;
+  }
+
+  get direction() {
+    return this._direction;
+  }
 
   update() {
-    if (this.direction == Direction.Right) {
+    if (this._direction == Direction.Right) {
       this._x += this.cellSize * this.speed;
-    } else if (this.direction == Direction.Left) {
+    } else if (this._direction == Direction.Left) {
       this._x -= this.cellSize * this.speed;
-    } else if (this.direction == Direction.Down) {
+    } else if (this._direction == Direction.Down) {
       this._y += this.cellSize * this.speed;
-    } else if (this.direction == Direction.Up) {
+    } else if (this._direction == Direction.Up) {
       this._y -= this.cellSize * this.speed;
     }
   }
