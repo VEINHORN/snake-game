@@ -25,11 +25,10 @@ export class Eat implements GameObject {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    /*console.log(
-      "Eat: {x: " + this._x + ", y: " + this._y + "}" + this.cellSize
-    );*/
-
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this._x, this._y, this.cellSize, this.cellSize);
+    ctx.drawImage(
+      <CanvasImageSource>document.getElementById("apple"),
+      this._x,
+      this._y
+    );
   }
 }

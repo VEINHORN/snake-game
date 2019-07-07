@@ -2,6 +2,11 @@ import { Game } from "./game";
 import { Snake } from "./snake/snake";
 import { Control } from "./control";
 
+// Images
+let apple = document.getElementById("apple");
+
+let score = document.getElementById("score");
+
 let canvas = <HTMLCanvasElement>document.getElementById("gameScreen");
 let ctx = canvas.getContext("2d");
 

@@ -13,9 +13,9 @@ export class Snake {
   constructor(cellSize: number) {
     this.cellSize = cellSize;
     this._parts = [
-      new SnakePart(cellSize * 0, 0),
-      new SnakePart(cellSize * 1, 0),
-      new SnakePart(cellSize * 2, 0)
+      new SnakePart(cellSize * 0, cellSize * 15),
+      new SnakePart(cellSize * 1, cellSize * 15),
+      new SnakePart(cellSize * 2, cellSize * 15)
     ];
 
     // Right is direction by default

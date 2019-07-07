@@ -83,6 +83,8 @@ export class Game {
 
     // Draw snake
     this._snake.draw(ctx);
+
+    // ctx.drawImage(<CanvasImageSource>document.getElementById("apple"), 0, 0);
   }
 
   // detect collision between snake and eat

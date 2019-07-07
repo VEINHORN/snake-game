@@ -30,7 +30,10 @@ export class Bullet implements Weapon, Position, GameObject {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = "yellow";
-    ctx.fillRect(this._x, this._y, this.cellSize, this.cellSize);
+    ctx.drawImage(
+      <CanvasImageSource>document.getElementById("bullet"),
+      this._x,
+      this._y
+    );
   }
 }
