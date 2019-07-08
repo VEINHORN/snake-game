@@ -7,6 +7,7 @@ import { Bullet } from "./weapon/bullet";
 import { Cell } from "./object/cell";
 import { Wall } from "./object/wall";
 import { BulletCollisionDetector } from "./collision/bullet_collision";
+import { Scores } from "./scores";
 
 export class Game {
   private _snake: Snake;
@@ -61,17 +62,31 @@ export class Game {
     if (
       new EatCollisionDetector(this._snake, this._eat, this.cellSize).detect()
     ) {
+      // Generate new eat item
       this._eat.push(this.createRandomEat());
+
+      this._snake.increaseScores(Scores.AppleEaten);
+      this.drawScoresOnScreen();
     }
 
-    new BulletCollisionDetector(
-      this.snake.bullets,
-      this._walls,
-      this.cellSize
-    ).detect();
+    if (
+      new BulletCollisionDetector(
+        this.snake.bullets,
+        this._walls,
+        this.cellSize
+      ).detect()
+    ) {
+      this._snake.increaseScores(Scores.BulletInTheWall);
+      this.drawScoresOnScreen();
+    }
 
     // Update snake state
     this._snake.update();
+  }
+
+  drawScoresOnScreen() {
+    document.getElementById("scores").innerHTML =
+      "Scores: " + this._snake.scores;
   }
 
   draw(ctx: CanvasRenderingContext2D) {

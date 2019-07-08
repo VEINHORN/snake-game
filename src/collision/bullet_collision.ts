@@ -2,11 +2,10 @@ import { CollisionDetector } from "./collision";
 import { Bullet } from "../weapon/bullet";
 import { Wall } from "../object/wall";
 import { Direction } from "../direction";
-import { Snake } from "../snake/snake";
 import { Cell } from "../object/cell";
 
 /**
- * Detects collision between bullet and walls
+ * Detects all collisions related to the bullets
  */
 export class BulletCollisionDetector implements CollisionDetector {
   private _bullets: Bullet[];

@@ -1,6 +1,7 @@
 import { SnakePart } from "./snake_part";
 import { Direction } from "../direction";
 import { Bullet } from "../weapon/bullet";
+import { Scores } from "../scores";
 
 export class Snake {
   private _parts: SnakePart[];
@@ -9,6 +10,8 @@ export class Snake {
 
   // Fired bullets
   private _bullets: Bullet[];
+
+  private _scores: number;
 
   constructor(cellSize: number) {
     this.cellSize = cellSize;
@@ -22,6 +25,16 @@ export class Snake {
     this._direction = Direction.Right;
 
     this._bullets = [];
+
+    this._scores = 0;
+  }
+
+  increaseScores(scores: Scores) {
+    this._scores += scores;
+  }
+
+  get scores() {
+    return this._scores;
   }
 
   get bullets() {
