@@ -28,7 +28,7 @@ export class Game {
 
     // fill game field with eat objects
     this._eat = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 25; i++) {
       this._eat.push(
         new Eat(
           cellSize * Math.floor(Math.random() * (gameHeight / cellSize) + 0),
